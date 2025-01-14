@@ -6,8 +6,12 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class DynamicGenerator {
     public static void main(String[] args) throws IOException, TemplateException {
@@ -29,7 +33,7 @@ public class DynamicGenerator {
         configuration.setDefaultEncoding("utf-8");
 
         Template template = configuration.getTemplate(new File(inputPath).getName());
-        FileWriter out = new FileWriter(outputPath);
+        Writer out = new OutputStreamWriter(Files.newOutputStream(Paths.get(outputPath)), StandardCharsets.UTF_8);
         template.process(model, out);
         out.close();
     }
