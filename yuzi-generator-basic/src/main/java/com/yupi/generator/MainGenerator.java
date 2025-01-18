@@ -23,18 +23,25 @@ public class MainGenerator {
      * @throws IOException       IO 异常
      */
     public static void doGenerate(Object model) throws TemplateException, IOException {
-        String projectPath = System.getProperty("user.dir");
-        File parentFile = new File(projectPath).getParentFile();
-        String inputPath = new File(parentFile, "yuzi-generator-demo-projects/acm-template").getAbsolutePath();
-        String outputPath = projectPath;
+        String inputRootPath = "E:\\wangy\\Documents\\Javaweb\\yupi\\yuzi-generator\\yuzi-generator-demo-projects\\acm-template-pro";
+        String outputRootPath = "E:\\wangy\\Documents\\Javaweb\\yupi\\yuzi-generator\\acm-template-pro";
 
+        String inputPath;
+        String outputPath;
+
+        inputPath = new File(inputRootPath, "src/com/yupi/acm/MainTemplate.java.ftl").getAbsolutePath();
+        outputPath = new File(outputRootPath, "src/com/yupi/acm/MainTemplate.java").getAbsolutePath();
+        DynamicGenerator.doGenerate(inputPath, outputPath, model);
+        // 格式化 Java 文件
+        // javaFileFormatter(outputPath);
+
+        inputPath = new File(inputRootPath, ".gitignore").getAbsolutePath();
+        outputPath = new File(outputRootPath, ".gitignore").getAbsolutePath();
         StaticGenerator.copyFilesByHutool(inputPath, outputPath);
 
-        String inputDynamicFilePath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
-        String outputDynamicFilePath = projectPath + File.separator + "acm-template/src/com/yupi/acm/MainTemplate.java";
-        DynamicGenerator.doGenerate(inputDynamicFilePath, outputDynamicFilePath, model);
-        // 格式化 Java 文件
-        javaFileFormatter(outputDynamicFilePath);
+        inputPath = new File(inputRootPath, "README.md").getAbsolutePath();
+        outputPath = new File(outputRootPath, "README.md").getAbsolutePath();
+        StaticGenerator.copyFilesByHutool(inputPath, outputPath);
     }
 
     /**

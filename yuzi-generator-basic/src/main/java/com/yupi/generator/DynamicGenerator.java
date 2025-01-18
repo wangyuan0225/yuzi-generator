@@ -1,5 +1,6 @@
 package com.yupi.generator;
 
+import cn.hutool.core.io.FileUtil;
 import com.yupi.model.MainTemplateConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -28,6 +29,10 @@ public class DynamicGenerator {
     }
 
     public static void doGenerate(String inputPath, String outputPath, Object model) throws IOException, TemplateException {
+        if (!FileUtil.exist(outputPath)) {
+            FileUtil.touch(outputPath);
+        }
+
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_32);
         configuration.setDirectoryForTemplateLoading(new File(inputPath).getParentFile());
         configuration.setDefaultEncoding("utf-8");
