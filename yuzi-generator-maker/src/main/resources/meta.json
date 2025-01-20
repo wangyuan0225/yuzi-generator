@@ -6,8 +6,9 @@
   "author": "yupi",
   "createTime": "2023-11-22",
   "fileConfig": {
-    "inputRootPath": "E:/wangy/Documents/Javaweb/yupi/yuzi-generator/yuzi-generator-demo-projects/acm-template-pro",
-    "outputRootPath": "generated",
+    "inputRootPath": ".source/acm-template-pro",
+    "outputRootPath": "E:/wangy/Documents/Javaweb/yupi/yuzi-generator/acm-template-pro",
+    "sourceRootPath": "E:/wangy/Documents/Javaweb/yupi/yuzi-generator/yuzi-generator-demo-projects/acm-template-pro",
     "type": "dir",
     "files": [
       {
