@@ -41,14 +41,14 @@ public abstract class GenerateTemplate {
         buildDist(outputPath, jarPath, shellOutputFilePath, sourceCopyDestPath);
     }
 
-    private static String copySource(Meta meta, String outputPath) {
+    protected static String copySource(Meta meta, String outputPath) {
         String sourceRootPath = meta.getFileConfig().getSourceRootPath();
         String sourceCopyDestPath = outputPath + File.separator + ".source";
         FileUtil.copy(sourceRootPath, sourceCopyDestPath, false);
         return sourceCopyDestPath;
     }
 
-    private static void generateCode(Meta meta, String outputPath) throws IOException, TemplateException {
+    protected static void generateCode(Meta meta, String outputPath) throws IOException, TemplateException {
         // 读取 resources 目录
         ClassPathResource classPathResource = new ClassPathResource("");
         String inputResourcePath = classPathResource.getAbsolutePath();
@@ -117,7 +117,7 @@ public abstract class GenerateTemplate {
         DynamicFileGenerator.doGenerate(inputFilePath , outputFilePath, meta);
     }
 
-    private static String buildJar(String outputPath, Meta meta) throws IOException, InterruptedException {
+    protected static String buildJar(String outputPath, Meta meta) throws IOException, InterruptedException {
         JarGenerator.doGenerate(outputPath);
         String jarName = String.format("%s-%s-jar-with-dependencies.jar", meta.getName(), meta.getVersion());
         return "target/" + jarName;
